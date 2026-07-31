@@ -1,0 +1,16 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.6.2
+_src_path: https://github.com/jupyterlab/extension-template
+advanced: false
+author_email: reubengann@gmail.com
+author_name: Reuben Gann
+has_ai_rules: false
+has_binder: false
+has_settings: false
+kind: frontend
+labextension_name: jupyterlab-physics-derivation-pad
+project_short_description: Physics Derivation Pad main-area workspace for JupyterLab.
+python_name: jupyterlab_physics_derivation_pad
+repository: https://github.com/reubengann/jupyterlab-physics-derivation-pad
+test: true
+

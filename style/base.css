@@ -1,0 +1,17 @@
+.jp-PhysicsDerivationPad-content {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--jp-notebook-padding);
+  background: var(--jp-layout-color0);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-PhysicsDerivationPad-content .pdp-ui {
+  min-width: max-content;
+}
+
+.jp-PhysicsDerivationPad-status {
+  padding: var(--jp-notebook-padding);
+  color: var(--jp-ui-font-color1);
+}
