@@ -3321,25 +3321,25 @@ __metadata:
 
 "@physics-derivation-pad/core@file:../physics-derivation-pad::locator=jupyterlab-physics-derivation-pad%40workspace%3A.":
   version: 0.0.0
-  resolution: "@physics-derivation-pad/core@file:../physics-derivation-pad#../physics-derivation-pad::hash=501897&locator=jupyterlab-physics-derivation-pad%40workspace%3A."
+  resolution: "@physics-derivation-pad/core@file:../physics-derivation-pad#../physics-derivation-pad::hash=48e33b&locator=jupyterlab-physics-derivation-pad%40workspace%3A."
   dependencies:
     "@unified-latex/unified-latex-util-parse": ^1.8.4
     "@unified-latex/unified-latex-util-print-raw": ^1.8.4
     algebrite: ^1.4.0
-  checksum: 35b854955b8dec1c3f822ad7106d75e2bbf9515a8c292ccd140efff0771c70d9619940f15d3993351ba098575348a0336b3bb2d2f704813a82bf1c275664a3c2
+  checksum: a1d09e2cb8f67818b5d133709b65df156023ee3ab7ae6cdfd75e419dd41aaba4992a8c44327977ac68b03b96c117267ea29299a9f96574f69dc1693f7bdaea84
   languageName: node
   linkType: hard
 
 "@physics-derivation-pad/ui@file:../physics-derivation-pad/packages/ui::locator=jupyterlab-physics-derivation-pad%40workspace%3A.":
   version: 0.0.0
-  resolution: "@physics-derivation-pad/ui@file:../physics-derivation-pad/packages/ui#../physics-derivation-pad/packages/ui::hash=acdfae&locator=jupyterlab-physics-derivation-pad%40workspace%3A."
+  resolution: "@physics-derivation-pad/ui@file:../physics-derivation-pad/packages/ui#../physics-derivation-pad/packages/ui::hash=3c8821&locator=jupyterlab-physics-derivation-pad%40workspace%3A."
   dependencies:
     mathlive: ^0.109.1
   peerDependencies:
     "@physics-derivation-pad/core": "*"
     react: ^18.2.0 || ^19.0.0
     react-dom: ^18.2.0 || ^19.0.0
-  checksum: cfe8964988fec05c3b5bb6a007aaf38c119fe287fd5f29bc2157d0d42f90090f9cf34fdbb1f4464d3b394c087af18866ded5e19cf2b869301717f4b8b5f32e74
+  checksum: 8fabb4606bd7ed4f06678dbaa47a50af7b21c8244d333917a466114cf184c3b2c796294165cf5ebc4ce70008bc4be2dfdb8438c6e81bbb4f4bebfc66169685af
   languageName: node
   linkType: hard
 
