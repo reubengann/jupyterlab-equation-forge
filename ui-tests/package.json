@@ -1,7 +1,7 @@
 {
-  "name": "jupyterlab-physics-derivation-pad-ui-tests",
+  "name": "jupyterlab-equation-forge-ui-tests",
   "version": "1.0.0",
-  "description": "JupyterLab jupyterlab-physics-derivation-pad Integration Tests",
+  "description": "JupyterLab jupyterlab-equation-forge Integration Tests",
   "private": true,
   "scripts": {
     "start": "jupyter lab --config jupyter_server_test_config.py",

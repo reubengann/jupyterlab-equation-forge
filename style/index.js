@@ -1,2 +1,2 @@
-import '@physics-derivation-pad/ui/style/index.css';
+import '@equation-forge/ui/style/index.css';
 import './base.css';

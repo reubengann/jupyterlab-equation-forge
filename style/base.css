@@ -1,4 +1,4 @@
-.jp-PhysicsDerivationPad-content {
+.jp-EquationForge-content {
   min-width: 0;
   min-height: 0;
   overflow: auto;
@@ -7,11 +7,11 @@
   color: var(--jp-ui-font-color1);
 }
 
-.jp-PhysicsDerivationPad-content .pdp-ui {
+.jp-EquationForge-content .equation-forge-ui {
   min-width: max-content;
 }
 
-.jp-PhysicsDerivationPad-status {
+.jp-EquationForge-status {
   padding: var(--jp-notebook-padding);
   color: var(--jp-ui-font-color1);
 }

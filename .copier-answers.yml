@@ -8,9 +8,9 @@ has_ai_rules: false
 has_binder: false
 has_settings: false
 kind: frontend
-labextension_name: jupyterlab-physics-derivation-pad
-project_short_description: Physics Derivation Pad main-area workspace for JupyterLab.
-python_name: jupyterlab_physics_derivation_pad
-repository: https://github.com/reubengann/jupyterlab-physics-derivation-pad
+labextension_name: jupyterlab-equation-forge
+project_short_description: Equation Forge main-area workspace for JupyterLab.
+python_name: jupyterlab_equation_forge
+repository: https://github.com/reubengann/jupyterlab-equation-forge
 test: true
 

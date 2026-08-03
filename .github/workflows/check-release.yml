@@ -26,5 +26,5 @@ jobs:
       - name: Upload Distributions
         uses: actions/upload-artifact@v4
         with:
-          name: jupyterlab_physics_derivation_pad-releaser-dist-${{ github.run_number }}
+          name: jupyterlab_equation_forge-releaser-dist-${{ github.run_number }}
           path: .jupyter_releaser_checkout/dist

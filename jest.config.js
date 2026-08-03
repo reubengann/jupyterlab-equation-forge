@@ -6,7 +6,7 @@ const esModules = [
   '@jupyter/web-components',
   '@jupyter/ydoc',
   '@jupyterlab/',
-  '@physics-derivation-pad/',
+  '@equation-forge/',
   'lib0',
   'nanoid',
   'vscode-ws-jsonrpc',
@@ -27,16 +27,18 @@ module.exports = {
   ],
   coverageReporters: ['lcov', 'text'],
   moduleNameMapper: {
-    '^@physics-derivation-pad/ui$':
-      '<rootDir>/node_modules/@physics-derivation-pad/ui/dist/index.js',
-    '^@physics-derivation-pad/core/ast$':
-      '<rootDir>/node_modules/@physics-derivation-pad/core/dist/math/ast/index.js',
-    '^@physics-derivation-pad/core/compile$':
-      '<rootDir>/node_modules/@physics-derivation-pad/core/dist/math/compile/index.js',
-    '^@physics-derivation-pad/core/latex$':
-      '<rootDir>/node_modules/@physics-derivation-pad/core/dist/math/adapters/latex/index.js',
-    '^@physics-derivation-pad/core/rewrite$':
-      '<rootDir>/node_modules/@physics-derivation-pad/core/dist/math/rewrite/index.js',
+    '^@equation-forge/ui$':
+      '<rootDir>/node_modules/@equation-forge/ui/dist/index.js',
+    '^@equation-forge/core/ast$':
+      '<rootDir>/node_modules/@equation-forge/core/dist/math/ast/index.js',
+    '^@equation-forge/core/compile$':
+      '<rootDir>/node_modules/@equation-forge/core/dist/math/compile/index.js',
+    '^@equation-forge/core/latex$':
+      '<rootDir>/node_modules/@equation-forge/core/dist/math/adapters/latex/index.js',
+    '^@equation-forge/core/rewrite$':
+      '<rootDir>/node_modules/@equation-forge/core/dist/math/rewrite/index.js',
+    '^@equation-forge/core/selection$':
+      '<rootDir>/node_modules/@equation-forge/core/dist/math/selection/index.js',
     '^mathlive$': '<rootDir>/node_modules/mathlive/mathlive.js'
   },
   testRegex: 'src/.*/.*.spec.ts[x]?$',

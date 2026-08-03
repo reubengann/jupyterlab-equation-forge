@@ -12,15 +12,15 @@ import { ILauncher } from '@jupyterlab/launcher';
 import { IStateDB } from '@jupyterlab/statedb';
 import { LabIcon } from '@jupyterlab/ui-components';
 
-import { DerivationPadWidget } from './padWidget';
-import { StateDBPadStorage } from './storage';
+import { EquationForgeWidget } from './equationForgeWidget';
+import { StateDBEquationForgeStorage } from './storage';
 
-export const PLUGIN_ID = 'jupyterlab-physics-derivation-pad:plugin';
-export const OPEN_COMMAND = 'jupyterlab-physics-derivation-pad:open';
-export const WIDGET_ID = 'jupyterlab-physics-derivation-pad:main';
+export const PLUGIN_ID = 'jupyterlab-equation-forge:plugin';
+export const OPEN_COMMAND = 'jupyterlab-equation-forge:open';
+export const WIDGET_ID = 'jupyterlab-equation-forge:main';
 
-export const derivationPadIcon = new LabIcon({
-  name: 'jupyterlab-physics-derivation-pad:icon',
+export const equationForgeIcon = new LabIcon({
+  name: 'jupyterlab-equation-forge:icon',
   svgstr:
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M4 3h16v18H4V3zm2 2v14h12V5H6zm2 2h8v2H8V7zm0 4h3v2H8v-2zm5 0h3v2h-3v-2zm-5 4h3v2H8v-2zm5 0h3v2h-3v-2z"/></svg>'
 });
@@ -40,22 +40,24 @@ export function activate({
   launcher,
   palette
 }: ActivateOptions): void {
-  const tracker = new WidgetTracker<MainAreaWidget<DerivationPadWidget>>({
-    namespace: 'jupyterlab-physics-derivation-pad'
+  const tracker = new WidgetTracker<MainAreaWidget<EquationForgeWidget>>({
+    namespace: 'jupyterlab-equation-forge'
   });
-  let widget: MainAreaWidget<DerivationPadWidget> | null = null;
+  let widget: MainAreaWidget<EquationForgeWidget> | null = null;
 
   app.commands.addCommand(OPEN_COMMAND, {
-    label: 'Open Physics Derivation Pad',
-    caption: 'Open the Physics Derivation Pad',
-    icon: derivationPadIcon,
+    label: 'Open Equation Forge',
+    caption: 'Open Equation Forge',
+    icon: equationForgeIcon,
     execute: async () => {
       if (!widget || widget.isDisposed) {
-        const content = new DerivationPadWidget(new StateDBPadStorage(stateDB));
+        const content = new EquationForgeWidget(
+          new StateDBEquationForgeStorage(stateDB)
+        );
         widget = new MainAreaWidget({ content });
         widget.id = WIDGET_ID;
-        widget.title.label = 'Physics Derivation Pad';
-        widget.title.icon = derivationPadIcon;
+        widget.title.label = 'Equation Forge';
+        widget.title.icon = equationForgeIcon;
         widget.title.closable = true;
         await tracker.add(widget);
         app.shell.add(widget, 'main');
@@ -73,7 +75,7 @@ export function activate({
   });
   palette?.addItem({
     command: OPEN_COMMAND,
-    category: 'Physics'
+    category: 'Equation Forge'
   });
 
   void restorer.restore(tracker, {
@@ -83,11 +85,11 @@ export function activate({
 }
 
 /**
- * Initialization data for the jupyterlab-physics-derivation-pad extension.
+ * Initialization data for the jupyterlab-equation-forge extension.
  */
 const plugin: JupyterFrontEndPlugin<void> = {
   id: PLUGIN_ID,
-  description: 'Physics Derivation Pad main-area workspace for JupyterLab.',
+  description: 'Equation Forge main-area workspace for JupyterLab.',
   autoStart: true,
   requires: [ILayoutRestorer, IStateDB],
   optional: [ILauncher, ICommandPalette],

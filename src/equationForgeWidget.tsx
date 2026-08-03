@@ -1,23 +1,29 @@
 import { ReactWidget } from '@jupyterlab/apputils';
 import {
-  DerivationPad,
-  configurePadEnvironment,
+  EquationForge,
+  configureEquationForgeEnvironment,
+  type EquationForgeOptions,
   type PadEquation
-} from '@physics-derivation-pad/ui';
+} from '@equation-forge/ui';
 import React, { useState } from 'react';
 
-import { IPadState, IPadStorage } from './storage';
+import { IEquationForgeState, IEquationForgeStorage } from './storage';
 
-configurePadEnvironment({ fontsDirectory: null });
+configureEquationForgeEnvironment({ fontsDirectory: null });
 
-type PadViewProps = {
-  initialState: IPadState;
-  storage: IPadStorage;
+type EquationForgeViewProps = {
+  initialState: IEquationForgeState;
+  storage: IEquationForgeStorage;
 };
 
-function PadView({ initialState, storage }: PadViewProps): JSX.Element {
+function EquationForgeView({
+  initialState,
+  storage
+}: EquationForgeViewProps): JSX.Element {
   const [state, setState] = useState(initialState);
-  const updateState = (update: (current: IPadState) => IPadState): void => {
+  const updateState = (
+    update: (current: IEquationForgeState) => IEquationForgeState
+  ): void => {
     setState(current => {
       const next = update(current);
       void storage.save(next);
@@ -26,12 +32,12 @@ function PadView({ initialState, storage }: PadViewProps): JSX.Element {
   };
 
   return (
-    <DerivationPad
+    <EquationForge
       equations={state.document.equations}
       activeEquationId={state.activeEquationId}
       options={state.options}
-      title="Physics Derivation Pad"
-      description="Build and rewrite equations. The pad is saved in your JupyterLab workspace."
+      title="Equation Forge"
+      description="Build and rewrite equations. Equation Forge is saved in your JupyterLab workspace."
       onEquationsChange={(equations: PadEquation[]) => {
         updateState(current => ({
           ...current,
@@ -46,36 +52,39 @@ function PadView({ initialState, storage }: PadViewProps): JSX.Element {
       onActiveEquationIdChange={activeEquationId => {
         updateState(current => ({ ...current, activeEquationId }));
       }}
-      onOptionsChange={options => {
+      onOptionsChange={(options: EquationForgeOptions) => {
         updateState(current => ({ ...current, options }));
       }}
     />
   );
 }
 
-export class DerivationPadWidget extends ReactWidget {
-  constructor(private readonly storage: IPadStorage) {
+export class EquationForgeWidget extends ReactWidget {
+  constructor(private readonly storage: IEquationForgeStorage) {
     super();
-    this.addClass('jp-PhysicsDerivationPad-content');
+    this.addClass('jp-EquationForge-content');
     void this.load();
   }
 
   render(): JSX.Element {
     if (this.loadError) {
       return (
-        <div className="jp-PhysicsDerivationPad-status" role="alert">
-          Unable to load the saved derivation pad: {this.loadError.message}
+        <div className="jp-EquationForge-status" role="alert">
+          Unable to load saved Equation Forge state: {this.loadError.message}
         </div>
       );
     }
     if (!this.initialState) {
       return (
-        <div className="jp-PhysicsDerivationPad-status">
-          Loading derivation pad…
-        </div>
+        <div className="jp-EquationForge-status">Loading Equation Forge…</div>
       );
     }
-    return <PadView initialState={this.initialState} storage={this.storage} />;
+    return (
+      <EquationForgeView
+        initialState={this.initialState}
+        storage={this.storage}
+      />
+    );
   }
 
   dispose(): void {
@@ -98,6 +107,6 @@ export class DerivationPadWidget extends ReactWidget {
     }
   }
 
-  private initialState: IPadState | null = null;
+  private initialState: IEquationForgeState | null = null;
   private loadError: Error | null = null;
 }

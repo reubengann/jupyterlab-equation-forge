@@ -1,8 +1,8 @@
-# jupyterlab_physics_derivation_pad
+# jupyterlab_equation_forge
 
-[![Github Actions Status](https://github.com/reubengann/jupyterlab-physics-derivation-pad/workflows/Build/badge.svg)](https://github.com/reubengann/jupyterlab-physics-derivation-pad/actions/workflows/build.yml)
+[![Github Actions Status](https://github.com/reubengann/jupyterlab-equation-forge/workflows/Build/badge.svg)](https://github.com/reubengann/jupyterlab-equation-forge/actions/workflows/build.yml)
 
-Physics Derivation Pad main-area workspace for JupyterLab.
+Equation Forge main-area workspace for JupyterLab.
 
 ## Requirements
 
@@ -13,7 +13,7 @@ Physics Derivation Pad main-area workspace for JupyterLab.
 To install the extension, execute:
 
 ```bash
-pip install jupyterlab_physics_derivation_pad
+pip install jupyterlab_equation_forge
 ```
 
 ## Uninstall
@@ -21,7 +21,7 @@ pip install jupyterlab_physics_derivation_pad
 To remove the extension, execute:
 
 ```bash
-pip uninstall jupyterlab_physics_derivation_pad
+pip uninstall jupyterlab_equation_forge
 ```
 
 ## Contributing

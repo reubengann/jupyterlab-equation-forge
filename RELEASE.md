@@ -1,4 +1,4 @@
-# Making a new release of jupyterlab_physics_derivation_pad
+# Making a new release of jupyterlab_equation_forge
 
 The extension can be published to `PyPI` and `npm` manually or using the [Jupyter Releaser](https://github.com/jupyter-server/jupyter_releaser).
 

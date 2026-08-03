@@ -3,25 +3,26 @@ import {
   createDefaultPadDocument,
   parseStoredPadState,
   serializePadDocument,
-  type DerivationPadOptions,
+  type EquationForgeOptions,
   type PadDocument
-} from '@physics-derivation-pad/ui';
+} from '@equation-forge/ui';
 
-export const PAD_STATE_KEY = 'jupyterlab-physics-derivation-pad:document-state';
+export const EQUATION_FORGE_STATE_KEY =
+  'jupyterlab-equation-forge:document-state';
 
-export interface IPadState {
+export interface IEquationForgeState {
   document: PadDocument;
   activeEquationId: string | null;
-  options: DerivationPadOptions;
+  options: EquationForgeOptions;
 }
 
-export interface IPadStorage {
-  load(): Promise<IPadState>;
-  save(state: IPadState): Promise<void>;
+export interface IEquationForgeStorage {
+  load(): Promise<IEquationForgeState>;
+  save(state: IEquationForgeState): Promise<void>;
   flush(): Promise<void>;
 }
 
-type StoredPadState = {
+type StoredEquationForgeState = {
   document?: unknown;
   activeEquationId?: unknown;
   options?: {
@@ -29,7 +30,7 @@ type StoredPadState = {
   };
 };
 
-export function createDefaultPadState(): IPadState {
+export function createDefaultEquationForgeState(): IEquationForgeState {
   const document = createDefaultPadDocument();
   return {
     document,
@@ -40,12 +41,12 @@ export function createDefaultPadState(): IPadState {
   };
 }
 
-export function parsePadState(value: unknown): IPadState {
+export function parseEquationForgeState(value: unknown): IEquationForgeState {
   if (!value || typeof value !== 'object') {
-    return createDefaultPadState();
+    return createDefaultEquationForgeState();
   }
 
-  const candidate = value as StoredPadState;
+  const candidate = value as StoredEquationForgeState;
   const document = parseStoredPadState(candidate.document);
   const requestedActiveId =
     typeof candidate.activeEquationId === 'string'
@@ -69,17 +70,22 @@ export function parsePadState(value: unknown): IPadState {
   };
 }
 
-export class StateDBPadStorage implements IPadStorage {
+export class StateDBEquationForgeStorage implements IEquationForgeStorage {
   constructor(
     private readonly stateDB: IStateDB,
-    private readonly key = PAD_STATE_KEY
+    private readonly key = EQUATION_FORGE_STATE_KEY
   ) {}
 
-  async load(): Promise<IPadState> {
-    return parsePadState(await this.stateDB.fetch(this.key));
+  async load(): Promise<IEquationForgeState> {
+    const stored = await this.stateDB.fetch(this.key);
+    if (stored !== null && stored !== undefined) {
+      return parseEquationForgeState(stored);
+    }
+
+    return createDefaultEquationForgeState();
   }
 
-  save(state: IPadState): Promise<void> {
+  save(state: IEquationForgeState): Promise<void> {
     const stored = {
       document: serializePadDocument(state.document),
       activeEquationId: state.activeEquationId,
