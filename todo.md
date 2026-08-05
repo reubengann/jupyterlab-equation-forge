@@ -1,0 +1,2 @@
+- (possibly upstream) Add equation button, edit/other controls are off the edge of the screen when side-by-side tabbled.
+- Title seems unnecessary
