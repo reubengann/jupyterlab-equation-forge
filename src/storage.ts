@@ -3,6 +3,7 @@ import {
   createDefaultPadDocument,
   parseStoredPadState,
   serializePadDocument,
+  type EquationCopySurroundMode,
   type EquationForgeOptions,
   type PadDocument
 } from '@equation-forge/ui';
@@ -26,9 +27,19 @@ type StoredEquationForgeState = {
   document?: unknown;
   activeEquationId?: unknown;
   options?: {
+    copySurroundMode?: unknown;
+    showEquationNumbers?: unknown;
     wrapEquationCopiesInDisplayMath?: unknown;
   };
 };
+
+function isCopySurroundMode(value: unknown): value is EquationCopySurroundMode {
+  return (
+    value === 'none' ||
+    value === 'display-math' ||
+    value === 'equation-environment'
+  );
+}
 
 export function createDefaultEquationForgeState(): IEquationForgeState {
   const document = createDefaultPadDocument();
@@ -36,7 +47,8 @@ export function createDefaultEquationForgeState(): IEquationForgeState {
     document,
     activeEquationId: document.equations[0]?.id ?? null,
     options: {
-      wrapEquationCopiesInDisplayMath: true
+      copySurroundMode: 'display-math',
+      showEquationNumbers: true
     }
   };
 }
@@ -57,14 +69,22 @@ export function parseEquationForgeState(value: unknown): IEquationForgeState {
   )
     ? requestedActiveId
     : (document.equations[0]?.id ?? null);
+  const storedOptions = candidate.options;
 
   return {
     document,
     activeEquationId,
     options: {
-      wrapEquationCopiesInDisplayMath:
-        typeof candidate.options?.wrapEquationCopiesInDisplayMath === 'boolean'
-          ? candidate.options.wrapEquationCopiesInDisplayMath
+      copySurroundMode: isCopySurroundMode(storedOptions?.copySurroundMode)
+        ? storedOptions.copySurroundMode
+        : typeof storedOptions?.wrapEquationCopiesInDisplayMath === 'boolean'
+          ? storedOptions.wrapEquationCopiesInDisplayMath
+            ? 'display-math'
+            : 'none'
+          : 'display-math',
+      showEquationNumbers:
+        typeof storedOptions?.showEquationNumbers === 'boolean'
+          ? storedOptions.showEquationNumbers
           : true
     }
   };

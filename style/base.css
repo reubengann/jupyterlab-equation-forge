@@ -18,3 +18,34 @@
   padding: var(--jp-notebook-padding);
   color: var(--jp-ui-font-color1);
 }
+
+.jp-EquationForge-toolbarItem {
+  display: flex;
+  align-items: center;
+}
+
+.jp-EquationForge-toolbarControls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.jp-EquationForge-toolbarControls label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-EquationForge-toolbarControls select {
+  height: 24px;
+  color: var(--jp-ui-font-color1);
+  background: var(--jp-layout-color1);
+  border: 1px solid var(--jp-border-color1);
+  border-radius: 2px;
+}
+
+.jp-EquationForge-toolbarControls button[aria-pressed='true'] {
+  background: var(--jp-layout-color3);
+}

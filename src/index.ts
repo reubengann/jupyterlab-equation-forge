@@ -6,13 +6,17 @@ import {
 import {
   ICommandPalette,
   MainAreaWidget,
+  ToolbarButton,
   WidgetTracker
 } from '@jupyterlab/apputils';
 import { ILauncher } from '@jupyterlab/launcher';
 import { IStateDB } from '@jupyterlab/statedb';
-import { LabIcon } from '@jupyterlab/ui-components';
+import { LabIcon, addIcon } from '@jupyterlab/ui-components';
 
-import { EquationForgeWidget } from './equationForgeWidget';
+import {
+  EquationForgeToolbarControls,
+  EquationForgeWidget
+} from './equationForgeWidget';
 import { StateDBEquationForgeStorage } from './storage';
 
 export const PLUGIN_ID = 'jupyterlab-equation-forge:plugin';
@@ -59,6 +63,19 @@ export function activate({
         widget.title.label = 'Equation Forge';
         widget.title.icon = equationForgeIcon;
         widget.title.closable = true;
+        widget.toolbar.addItem(
+          'addEquation',
+          new ToolbarButton({
+            icon: addIcon,
+            label: 'Add item',
+            tooltip: 'Add equation',
+            onClick: () => content.addEquation()
+          })
+        );
+        widget.toolbar.addItem(
+          'equationForgeOptions',
+          new EquationForgeToolbarControls(content)
+        );
         await tracker.add(widget);
         app.shell.add(widget, 'main');
       }

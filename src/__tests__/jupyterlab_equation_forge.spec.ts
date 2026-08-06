@@ -15,12 +15,27 @@ describe('Equation Forge storage', () => {
 
     expect(state.document.equations).toHaveLength(1);
     expect(state.activeEquationId).toBe(state.document.equations[0].id);
-    expect(state.options.wrapEquationCopiesInDisplayMath).toBe(true);
+    expect(state.options).toEqual({
+      copySurroundMode: 'display-math',
+      showEquationNumbers: true
+    });
+  });
+
+  it('migrates the legacy display-math copy option', () => {
+    expect(
+      parseEquationForgeState({
+        options: { wrapEquationCopiesInDisplayMath: false }
+      }).options
+    ).toEqual({
+      copySurroundMode: 'none',
+      showEquationNumbers: true
+    });
   });
 
   it('loads and serializes state through JupyterLab StateDB', async () => {
     const initial = createDefaultEquationForgeState();
-    initial.options.wrapEquationCopiesInDisplayMath = false;
+    initial.options.copySurroundMode = 'equation-environment';
+    initial.options.showEquationNumbers = false;
     const fetch = jest.fn().mockResolvedValue({
       document: serializePadDocument(initial.document),
       activeEquationId: initial.activeEquationId,
@@ -41,7 +56,10 @@ describe('Equation Forge storage', () => {
       EQUATION_FORGE_STATE_KEY,
       expect.objectContaining({
         document: serializePadDocument(initial.document),
-        options: { wrapEquationCopiesInDisplayMath: false }
+        options: {
+          copySurroundMode: 'equation-environment',
+          showEquationNumbers: false
+        }
       })
     );
   });

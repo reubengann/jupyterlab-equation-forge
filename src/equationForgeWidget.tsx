@@ -2,10 +2,12 @@ import { ReactWidget } from '@jupyterlab/apputils';
 import {
   EquationForge,
   configureEquationForgeEnvironment,
+  type EquationCopySurroundMode,
+  type EquationForgeCommands,
   type EquationForgeOptions,
   type PadEquation
 } from '@equation-forge/ui';
-import React, { useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 
 import { IEquationForgeState, IEquationForgeStorage } from './storage';
 
@@ -14,11 +16,15 @@ configureEquationForgeEnvironment({ fontsDirectory: null });
 type EquationForgeViewProps = {
   initialState: IEquationForgeState;
   storage: IEquationForgeStorage;
+  commandsRef: React.RefObject<EquationForgeCommands>;
+  onStateChange: (state: IEquationForgeState) => void;
 };
 
 function EquationForgeView({
   initialState,
-  storage
+  storage,
+  commandsRef,
+  onStateChange
 }: EquationForgeViewProps): JSX.Element {
   const [state, setState] = useState(initialState);
   const updateState = (
@@ -27,17 +33,18 @@ function EquationForgeView({
     setState(current => {
       const next = update(current);
       void storage.save(next);
+      onStateChange(next);
       return next;
     });
   };
 
   return (
     <EquationForge
+      ref={commandsRef}
       equations={state.document.equations}
       activeEquationId={state.activeEquationId}
       options={state.options}
-      title="Equation Forge"
-      description="Build and rewrite equations. Equation Forge is saved in your JupyterLab workspace."
+      showHeader={false}
       onEquationsChange={(equations: PadEquation[]) => {
         updateState(current => ({
           ...current,
@@ -83,6 +90,11 @@ export class EquationForgeWidget extends ReactWidget {
       <EquationForgeView
         initialState={this.initialState}
         storage={this.storage}
+        commandsRef={this.commandsRef}
+        onStateChange={state => {
+          this.currentOptions = state.options;
+          this.optionsListeners.forEach(listener => listener(state.options));
+        }}
       />
     );
   }
@@ -98,6 +110,10 @@ export class EquationForgeWidget extends ReactWidget {
   private async load(): Promise<void> {
     try {
       this.initialState = await this.storage.load();
+      this.currentOptions = this.initialState.options;
+      this.optionsListeners.forEach(listener =>
+        listener(this.initialState!.options)
+      );
     } catch (error) {
       this.loadError =
         error instanceof Error ? error : new Error('Unknown storage error');
@@ -109,4 +125,94 @@ export class EquationForgeWidget extends ReactWidget {
 
   private initialState: IEquationForgeState | null = null;
   private loadError: Error | null = null;
+  private readonly commandsRef = createRef<EquationForgeCommands>();
+  private currentOptions: EquationForgeOptions | null = null;
+  private readonly optionsListeners = new Set<
+    (options: EquationForgeOptions) => void
+  >();
+
+  get options(): EquationForgeOptions | null {
+    return this.currentOptions;
+  }
+
+  addEquation(): void {
+    this.commandsRef.current?.addEquation();
+  }
+
+  setCopySurroundMode(mode: EquationCopySurroundMode): void {
+    this.commandsRef.current?.setCopySurroundMode(mode);
+  }
+
+  setShowEquationNumbers(show: boolean): void {
+    this.commandsRef.current?.setShowEquationNumbers(show);
+  }
+
+  onOptionsChanged(
+    listener: (options: EquationForgeOptions) => void
+  ): () => void {
+    this.optionsListeners.add(listener);
+    if (this.currentOptions) {
+      listener(this.currentOptions);
+    }
+    return () => {
+      this.optionsListeners.delete(listener);
+    };
+  }
+}
+
+function EquationForgeToolbarView({
+  content
+}: {
+  content: EquationForgeWidget;
+}): JSX.Element {
+  const [options, setOptions] = useState(content.options);
+  useEffect(() => content.onOptionsChanged(setOptions), [content]);
+
+  return (
+    <div className="jp-EquationForge-toolbarControls">
+      <label>
+        <span>Copy surround</span>
+        <select
+          aria-label="Copy surround"
+          value={options?.copySurroundMode ?? 'display-math'}
+          disabled={!options}
+          onChange={event =>
+            content.setCopySurroundMode(
+              event.currentTarget.value as EquationCopySurroundMode
+            )
+          }
+        >
+          <option value="none">None</option>
+          <option value="display-math">$$…$$</option>
+          <option value="equation-environment">Equation environment</option>
+        </select>
+      </label>
+      <button
+        type="button"
+        className="jp-ToolbarButtonComponent"
+        aria-label="Show equation numbers"
+        title="Show equation numbers"
+        aria-pressed={options?.showEquationNumbers ?? false}
+        disabled={!options}
+        onClick={() =>
+          content.setShowEquationNumbers(
+            !(options?.showEquationNumbers ?? true)
+          )
+        }
+      >
+        Numbers
+      </button>
+    </div>
+  );
+}
+
+export class EquationForgeToolbarControls extends ReactWidget {
+  constructor(private readonly content: EquationForgeWidget) {
+    super();
+    this.addClass('jp-EquationForge-toolbarItem');
+  }
+
+  render(): JSX.Element {
+    return <EquationForgeToolbarView content={this.content} />;
+  }
 }

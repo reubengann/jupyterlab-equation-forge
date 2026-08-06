@@ -30,6 +30,7 @@
     },
     "scripts": {
         "build": "jlpm build:lib && jlpm build:labextension:dev",
+        "build:with-upstream": "jlpm refresh:equation-forge && jlpm build",
         "build:prod": "jlpm clean && jlpm build:lib:prod && jlpm build:labextension",
         "build:labextension": "jupyter-builder build .",
         "build:labextension:dev": "jupyter-builder build --development True .",
@@ -48,6 +49,7 @@
         "prettier": "jlpm prettier:base --write --list-different",
         "prettier:base": "prettier \"**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}\"",
         "prettier:check": "jlpm prettier:base --check",
+        "refresh:equation-forge": "npm --prefix ../equation-forge run build:ui && jlpm install",
         "stylelint": "jlpm stylelint:check --fix",
         "stylelint:check": "stylelint --cache \"style/**/*.css\"",
         "test": "jest --coverage",
