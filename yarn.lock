@@ -1662,25 +1662,25 @@ __metadata:
 
 "@equation-forge/core@file:../equation-forge::locator=jupyterlab-equation-forge%40workspace%3A.":
   version: 0.0.0
-  resolution: "@equation-forge/core@file:../equation-forge#../equation-forge::hash=271563&locator=jupyterlab-equation-forge%40workspace%3A."
+  resolution: "@equation-forge/core@file:../equation-forge#../equation-forge::hash=e83db8&locator=jupyterlab-equation-forge%40workspace%3A."
   dependencies:
     "@unified-latex/unified-latex-util-parse": ^1.8.4
     "@unified-latex/unified-latex-util-print-raw": ^1.8.4
     algebrite: ^1.4.0
-  checksum: abd15e7255c76e8426f72b2ede1ad6362eaee8dc34d0804d4494143d80775fb8e0751edc51aae91682258e15b1465a829ebb58680cb2f959b6c8d658fa188241
+  checksum: fe45b9db8e2fcd5697b834b9c36d8adaf9392d0ab864946d4dcce651d5e7db9bb83ed70debfb0d681600374b2ed8b446d2ead56bf612f44c1dd3257f403efb49
   languageName: node
   linkType: hard
 
 "@equation-forge/ui@file:../equation-forge/packages/ui::locator=jupyterlab-equation-forge%40workspace%3A.":
   version: 0.0.0
-  resolution: "@equation-forge/ui@file:../equation-forge/packages/ui#../equation-forge/packages/ui::hash=64b072&locator=jupyterlab-equation-forge%40workspace%3A."
+  resolution: "@equation-forge/ui@file:../equation-forge/packages/ui#../equation-forge/packages/ui::hash=e8874e&locator=jupyterlab-equation-forge%40workspace%3A."
   dependencies:
     mathlive: ^0.109.1
   peerDependencies:
     "@equation-forge/core": "*"
     react: ^18.2.0 || ^19.0.0
     react-dom: ^18.2.0 || ^19.0.0
-  checksum: 4bbf20e2ccbbe1f50bce9ef2aff9b178f5fd9c13daae05b010de0b91f11e707be33991971bf409af3154436f0aeac659dd1806a01196021dd4dbb2c5b505442f
+  checksum: bbf4dfe1cbc0f25583a9fa251279b3fce7bbba30860a14b476e8616fcf92549bf2e57482c5834081e16c3c50e0abcb30afc85aca81586c41f47805735af57c82
   languageName: node
   linkType: hard
 

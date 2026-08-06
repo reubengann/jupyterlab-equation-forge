@@ -1,14 +1,17 @@
 .jp-EquationForge-content {
+  box-sizing: border-box;
   min-width: 0;
   min-height: 0;
-  overflow: auto;
+  overflow: hidden auto;
   padding: var(--jp-notebook-padding);
   background: var(--jp-layout-color0);
   color: var(--jp-ui-font-color1);
 }
 
 .jp-EquationForge-content .equation-forge-ui {
-  min-width: max-content;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
 }
 
 .jp-EquationForge-status {
