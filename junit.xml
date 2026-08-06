@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="9.545">
-  <testsuite name="Equation Forge storage" errors="0" failures="0" skipped="0" timestamp="2026-08-06T18:59:28" time="8.08" tests="3">
-    <testcase classname="Equation Forge storage normalizes invalid persisted state" name="Equation Forge storage normalizes invalid persisted state" time="0.004">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="2.449">
+  <testsuite name="Equation Forge storage" errors="0" failures="0" skipped="0" timestamp="2026-08-06T19:34:39" time="1.409" tests="3">
+    <testcase classname="Equation Forge storage normalizes invalid persisted state" name="Equation Forge storage normalizes invalid persisted state" time="0.002">
     </testcase>
     <testcase classname="Equation Forge storage migrates the legacy display-math copy option" name="Equation Forge storage migrates the legacy display-math copy option" time="0">
     </testcase>
-    <testcase classname="Equation Forge storage loads and serializes state through JupyterLab StateDB" name="Equation Forge storage loads and serializes state through JupyterLab StateDB" time="0.003">
+    <testcase classname="Equation Forge storage loads and serializes state through JupyterLab StateDB" name="Equation Forge storage loads and serializes state through JupyterLab StateDB" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>

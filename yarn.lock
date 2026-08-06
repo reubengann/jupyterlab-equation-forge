@@ -1662,12 +1662,12 @@ __metadata:
 
 "@equation-forge/core@file:../equation-forge::locator=jupyterlab-equation-forge%40workspace%3A.":
   version: 0.0.0
-  resolution: "@equation-forge/core@file:../equation-forge#../equation-forge::hash=3052c5&locator=jupyterlab-equation-forge%40workspace%3A."
+  resolution: "@equation-forge/core@file:../equation-forge#../equation-forge::hash=4d93d3&locator=jupyterlab-equation-forge%40workspace%3A."
   dependencies:
     "@unified-latex/unified-latex-util-parse": ^1.8.4
     "@unified-latex/unified-latex-util-print-raw": ^1.8.4
     algebrite: ^1.4.0
-  checksum: ebeff95945c4fcaa12a1c7bcb37b3e4ae486e7c08a7b6128154ae6407bae7b335d4f03c44cffdac2a6474ec82d4572148f0781c04559e23e2fd848a8ed29ac88
+  checksum: 3971ff1a8520ffd018fd84cae1e8e0191e32c29c115b94749a07bba001e125de0fe4a2a9159af35718fb1d7b5f118c19e2fd57ee024dd9ed6a3e42c341aeafc4
   languageName: node
   linkType: hard
 

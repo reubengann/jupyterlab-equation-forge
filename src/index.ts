@@ -53,7 +53,7 @@ export function activate({
     label: 'Open Equation Forge',
     caption: 'Open Equation Forge',
     icon: equationForgeIcon,
-    execute: async () => {
+    execute: () => {
       if (!widget || widget.isDisposed) {
         const content = new EquationForgeWidget(
           new StateDBEquationForgeStorage(stateDB)
@@ -76,8 +76,13 @@ export function activate({
           'equationForgeOptions',
           new EquationForgeToolbarControls(content)
         );
-        await tracker.add(widget);
+      }
+
+      if (!widget.isAttached) {
         app.shell.add(widget, 'main');
+      }
+      if (!tracker.has(widget)) {
+        void tracker.add(widget);
       }
 
       app.shell.activateById(widget.id);
