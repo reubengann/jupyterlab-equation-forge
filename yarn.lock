@@ -1660,29 +1660,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@equation-forge/core@file:../equation-forge::locator=jupyterlab-equation-forge%40workspace%3A.":
-  version: 0.0.0
-  resolution: "@equation-forge/core@file:../equation-forge#../equation-forge::hash=4d93d3&locator=jupyterlab-equation-forge%40workspace%3A."
+"@equation-forge/core@portal:../equation-forge::locator=jupyterlab-equation-forge%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@equation-forge/core@portal:../equation-forge::locator=jupyterlab-equation-forge%40workspace%3A."
   dependencies:
     "@unified-latex/unified-latex-util-parse": ^1.8.4
     "@unified-latex/unified-latex-util-print-raw": ^1.8.4
     algebrite: ^1.4.0
-  checksum: 3971ff1a8520ffd018fd84cae1e8e0191e32c29c115b94749a07bba001e125de0fe4a2a9159af35718fb1d7b5f118c19e2fd57ee024dd9ed6a3e42c341aeafc4
   languageName: node
-  linkType: hard
+  linkType: soft
 
-"@equation-forge/ui@file:../equation-forge/packages/ui::locator=jupyterlab-equation-forge%40workspace%3A.":
-  version: 0.0.0
-  resolution: "@equation-forge/ui@file:../equation-forge/packages/ui#../equation-forge/packages/ui::hash=35a44f&locator=jupyterlab-equation-forge%40workspace%3A."
+"@equation-forge/ui@portal:../equation-forge/packages/ui::locator=jupyterlab-equation-forge%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@equation-forge/ui@portal:../equation-forge/packages/ui::locator=jupyterlab-equation-forge%40workspace%3A."
   dependencies:
     mathlive: ^0.109.1
   peerDependencies:
     "@equation-forge/core": "*"
     react: ^18.2.0 || ^19.0.0
     react-dom: ^18.2.0 || ^19.0.0
-  checksum: eefca639a2595dfd44d84c695bfd728b6b557f3a5b44d391c3658989850a32114f9bb9312ec7f05ede1574b11478316200dc9dd85e41cd870c9a34094db7ac17
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@eslint-community/eslint-utils@npm:^4.8.0, @eslint-community/eslint-utils@npm:^4.9.1":
   version: 4.10.1
@@ -7967,8 +7965,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "jupyterlab-equation-forge@workspace:."
   dependencies:
-    "@equation-forge/core": "file:../equation-forge"
-    "@equation-forge/ui": "file:../equation-forge/packages/ui"
+    "@equation-forge/core": "portal:../equation-forge"
+    "@equation-forge/ui": "portal:../equation-forge/packages/ui"
     "@eslint/js": ^9.0.0
     "@jupyter/builder": 1.0.1
     "@jupyter/eslint-plugin": ^0.0.5

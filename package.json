@@ -49,7 +49,7 @@
         "prettier": "jlpm prettier:base --write --list-different",
         "prettier:base": "prettier \"**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}\"",
         "prettier:check": "jlpm prettier:base --check",
-        "refresh:equation-forge": "npm --prefix ../equation-forge run build:ui && jlpm install",
+        "refresh:equation-forge": "npm --prefix ../equation-forge run build:ui",
         "stylelint": "jlpm stylelint:check --fix",
         "stylelint:check": "stylelint --cache \"style/**/*.css\"",
         "test": "jest --coverage",
@@ -58,8 +58,8 @@
         "watch:labextension": "jupyter-builder watch ."
     },
     "dependencies": {
-        "@equation-forge/core": "file:../equation-forge",
-        "@equation-forge/ui": "file:../equation-forge/packages/ui",
+        "@equation-forge/core": "portal:../equation-forge",
+        "@equation-forge/ui": "portal:../equation-forge/packages/ui",
         "@jupyterlab/application": "^4.0.0",
         "@jupyterlab/apputils": "^4.5.0",
         "@jupyterlab/launcher": "^4.5.0",
