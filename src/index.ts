@@ -21,6 +21,8 @@ import { StateDBEquationForgeStorage } from './storage';
 
 export const PLUGIN_ID = 'jupyterlab-equation-forge:plugin';
 export const OPEN_COMMAND = 'jupyterlab-equation-forge:open';
+export const ADD_EQUATION_COMMAND =
+  'jupyterlab-equation-forge:add-equation-entry';
 export const WIDGET_ID = 'jupyterlab-equation-forge:main';
 
 export const equationForgeIcon = new LabIcon({
@@ -87,6 +89,30 @@ export function activate({
 
       app.shell.activateById(widget.id);
       return widget;
+    }
+  });
+
+  app.commands.addCommand(ADD_EQUATION_COMMAND, {
+    describedBy: {
+      args: {
+        type: 'object',
+        properties: {
+          latex: { type: 'string' }
+        },
+        required: ['latex']
+      }
+    },
+    label: 'Add Equation Entry',
+    caption: 'Add a new Equation Forge entry containing the supplied LaTeX',
+    execute: async args => {
+      const latex = args['latex'];
+      if (typeof latex !== 'string') {
+        throw new TypeError(
+          `${ADD_EQUATION_COMMAND} requires a string "latex" argument`
+        );
+      }
+      await app.commands.execute(OPEN_COMMAND);
+      await widget!.content.addEquationEntry(latex);
     }
   });
 

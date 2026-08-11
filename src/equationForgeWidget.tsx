@@ -17,6 +17,7 @@ type EquationForgeViewProps = {
   initialState: IEquationForgeState;
   storage: IEquationForgeStorage;
   commandsRef: React.RefObject<EquationForgeCommands>;
+  onCommandsReady: (commands: EquationForgeCommands) => void;
   onStateChange: (state: IEquationForgeState) => void;
 };
 
@@ -24,9 +25,15 @@ function EquationForgeView({
   initialState,
   storage,
   commandsRef,
+  onCommandsReady,
   onStateChange
 }: EquationForgeViewProps): JSX.Element {
   const [state, setState] = useState(initialState);
+  useEffect(() => {
+    if (commandsRef.current) {
+      onCommandsReady(commandsRef.current);
+    }
+  }, [commandsRef, onCommandsReady]);
   const updateState = (
     update: (current: IEquationForgeState) => IEquationForgeState
   ): void => {
@@ -91,6 +98,7 @@ export class EquationForgeWidget extends ReactWidget {
         initialState={this.initialState}
         storage={this.storage}
         commandsRef={this.commandsRef}
+        onCommandsReady={this.onCommandsReady}
         onStateChange={state => {
           this.currentOptions = state.options;
           this.optionsListeners.forEach(listener => listener(state.options));
@@ -126,6 +134,17 @@ export class EquationForgeWidget extends ReactWidget {
   private initialState: IEquationForgeState | null = null;
   private loadError: Error | null = null;
   private readonly commandsRef = createRef<EquationForgeCommands>();
+  private readonly commandsReady = new Promise<EquationForgeCommands>(
+    resolve => {
+      this.resolveCommandsReady = resolve;
+    }
+  );
+  private resolveCommandsReady!: (commands: EquationForgeCommands) => void;
+  private readonly onCommandsReady = (
+    commands: EquationForgeCommands
+  ): void => {
+    this.resolveCommandsReady(commands);
+  };
   private currentOptions: EquationForgeOptions | null = null;
   private readonly optionsListeners = new Set<
     (options: EquationForgeOptions) => void
@@ -137,6 +156,11 @@ export class EquationForgeWidget extends ReactWidget {
 
   addEquation(): void {
     this.commandsRef.current?.addEquation();
+  }
+
+  async addEquationEntry(latex: string): Promise<void> {
+    const commands = await this.commandsReady;
+    commands.addEquation(latex);
   }
 
   setCopySurroundMode(mode: EquationCopySurroundMode): void {
