@@ -1,5 +1,9 @@
-import { serializePadDocument } from '@equation-forge/ui';
+import {
+  serializePadDocument,
+  type EquationForgeCommands
+} from '@equation-forge/ui';
 
+import { addEquationWithCurrentCommands } from '../equationForgeCommands';
 import {
   EQUATION_FORGE_STATE_KEY,
   StateDBEquationForgeStorage,
@@ -62,5 +66,25 @@ describe('Equation Forge storage', () => {
         }
       })
     );
+  });
+});
+
+describe('Equation Forge external insertion', () => {
+  it('uses the latest command handle and appends in display mode', async () => {
+    const firstAdd = jest.fn();
+    const latestAdd = jest.fn();
+    const commandsRef = {
+      current: { addEquation: firstAdd } as unknown as EquationForgeCommands
+    };
+    const ready = Promise.resolve();
+
+    await addEquationWithCurrentCommands(ready, commandsRef, 'x=y');
+    commandsRef.current = {
+      addEquation: latestAdd
+    } as unknown as EquationForgeCommands;
+    await addEquationWithCurrentCommands(ready, commandsRef, 'F=ma');
+
+    expect(firstAdd).toHaveBeenCalledWith('x=y', 'display');
+    expect(latestAdd).toHaveBeenCalledWith('F=ma', 'display');
   });
 });

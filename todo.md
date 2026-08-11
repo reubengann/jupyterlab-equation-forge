@@ -1,1 +1,0 @@
-- Instead of the header with "add equation" button and "copy equation with $$" we could utilize the jupyterlab toolbar. Put an "add item (+)" button and a dropdown with surround options like none, $$ $$, \equation, etc. Then eliminate all the top matter. Also have an option to hide the little equation numbers such as (1), as those are sometimes irrelevant and take up space.
