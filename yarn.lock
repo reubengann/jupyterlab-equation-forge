@@ -15,10 +15,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@arnog/colors@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@arnog/colors@npm:0.3.0"
-  checksum: ddfd13c1fed40abc4ce504bc4c4566fe8a1a25ba0400fda2c765344d66704c8e71cbfc054a0b6b8d4edeea040eed70b3c98d58192741d906ad885f0788c210da
+"@arnog/colors@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@arnog/colors@npm:0.5.0"
+  checksum: f9add4fa33b277170705a0d401b59b783dcf76dcafd544faddda66f68b8d5bb3df88fe7c0a1d57dc674c4510e15050aa53ee7c4f8806aaaa0a1ecca82f48ac27
   languageName: node
   linkType: hard
 
@@ -1586,14 +1586,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cortex-js/compute-engine@npm:0.55.6":
-  version: 0.55.6
-  resolution: "@cortex-js/compute-engine@npm:0.55.6"
+"@cortex-js/compute-engine@npm:0.58.0":
+  version: 0.58.0
+  resolution: "@cortex-js/compute-engine@npm:0.58.0"
   dependencies:
-    "@arnog/colors": ^0.3.0
+    "@arnog/colors": ^0.5.0
     complex-esm: ^2.1.1-esm1
     decimal.js: ^10.6.0
-  checksum: 4cc79fe08f72b442a62d04013b7de8a64865027062dc070efb83b790323214cca5d4b384cceb3df22385e7494610681a0c1fdca388043b8b721c32c15c5de976
+  checksum: b093590303519dff9e00d9d85304b15c81b5522a5b77151ab3dabad030755b8b7220710b19cd75a927b6487fc6ace5f6fffe04a9aed608472966b5ba6e93fc6d
   languageName: node
   linkType: hard
 
@@ -1674,7 +1674,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@equation-forge/ui@portal:../equation-forge/packages/ui::locator=jupyterlab-equation-forge%40workspace%3A."
   dependencies:
-    mathlive: ^0.109.1
+    mathlive: ^0.110.0
   peerDependencies:
     "@equation-forge/core": "*"
     react: ^18.2.0 || ^19.0.0
@@ -7966,7 +7966,7 @@ __metadata:
     eslint-plugin-prettier: ^5.0.0
     globals: ^15.0.0
     jest: ^29.2.0
-    mathlive: ^0.109.1
+    mathlive: ^0.110.0
     npm-run-all2: ^7.0.1
     prettier: ^3.0.0
     react: ^18.2.0
@@ -8309,12 +8309,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mathlive@npm:^0.109.1":
-  version: 0.109.2
-  resolution: "mathlive@npm:0.109.2"
+"mathlive@npm:^0.110.0":
+  version: 0.110.0
+  resolution: "mathlive@npm:0.110.0"
   dependencies:
-    "@cortex-js/compute-engine": 0.55.6
-  checksum: 1b698e8e042be4dcb871412da3761855a7ede2a5575c514e4a8a808954d30a8b3fe817cd84086ddf45bc02a62b4c7a14e7e42a3d5bd2cfd5c3a886ee556d56c1
+    "@cortex-js/compute-engine": 0.58.0
+  checksum: 179fe316e3beb943a3537670b3543fe649e02f9ab8fb94fa5580a8ddd46b8151286eadaa5f95fec94758f9e28dfb5cbd813e5dde2a0e898ae13b0d16cb562fdd
   languageName: node
   linkType: hard
 

@@ -65,7 +65,7 @@
         "@jupyterlab/launcher": "^4.5.0",
         "@jupyterlab/statedb": "^4.5.0",
         "@jupyterlab/ui-components": "^4.5.0",
-        "mathlive": "^0.109.1",
+        "mathlive": "^0.110.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
