@@ -2,7 +2,12 @@ import {
   serializePadDocument,
   type EquationForgeCommands
 } from '@equation-forge/ui';
+import { CommandRegistry } from '@lumino/commands';
 
+import {
+  TOGGLE_CAPTURE_MODE_COMMAND,
+  addCaptureModeToolbarButton
+} from '../captureModeToolbar';
 import { addEquationWithCurrentCommands } from '../equationForgeCommands';
 import {
   EQUATION_FORGE_STATE_KEY,
@@ -10,6 +15,12 @@ import {
   createDefaultEquationForgeState,
   parseEquationForgeState
 } from '../storage';
+
+jest.mock('@jupyterlab/apputils', () => ({
+  CommandToolbarButton: class {
+    constructor(readonly options: unknown) {}
+  }
+}));
 
 describe('Equation Forge storage', () => {
   it('normalizes invalid persisted state', () => {
@@ -86,5 +97,34 @@ describe('Equation Forge external insertion', () => {
 
     expect(firstAdd).toHaveBeenCalledWith('x=y', 'display');
     expect(latestAdd).toHaveBeenCalledWith('F=ma', 'display');
+  });
+});
+
+describe('Equation Forge capture mode integration', () => {
+  it('adds the shared capture command when it is available', () => {
+    const commands = new CommandRegistry();
+    commands.addCommand(TOGGLE_CAPTURE_MODE_COMMAND, {
+      label: 'Toggle Capture Mode',
+      execute: () => undefined
+    });
+    const addItem = jest.fn();
+
+    addCaptureModeToolbarButton(
+      { commands } as never,
+      { toolbar: { addItem } } as never
+    );
+
+    expect(addItem).toHaveBeenCalledWith('captureMode', expect.anything());
+  });
+
+  it('omits the capture button when Math Notebook Tools is absent', () => {
+    const addItem = jest.fn();
+
+    addCaptureModeToolbarButton(
+      { commands: new CommandRegistry() } as never,
+      { toolbar: { addItem } } as never
+    );
+
+    expect(addItem).not.toHaveBeenCalled();
   });
 });

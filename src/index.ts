@@ -17,6 +17,7 @@ import {
   EquationForgeToolbarControls,
   EquationForgeWidget
 } from './equationForgeWidget';
+import { addCaptureModeToolbarButton } from './captureModeToolbar';
 import { StateDBEquationForgeStorage } from './storage';
 
 export const PLUGIN_ID = 'jupyterlab-equation-forge:plugin';
@@ -78,6 +79,7 @@ export function activate({
           'equationForgeOptions',
           new EquationForgeToolbarControls(content)
         );
+        addCaptureModeToolbarButton(app, widget);
       }
 
       if (!widget.isAttached) {
